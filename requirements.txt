@@ -1,0 +1,8 @@
+numpy
+gensim
+tqdm
+reach
+matplotlib
+pandas
+pyconll
+scikit_learn
