@@ -15,13 +15,13 @@ BEST_RBF = {"n_noun": 200}
 if __name__ == "__main__":
 
     scores = defaultdict(dict)
-    r = Reach.load("embeddings/restaurant_vecs_w2v.vec",
+    r = Reach.load("../embeddings/restaurant_vecs_w2v.vec",
                    unk_word="<UNK>")
 
     att = rbf_attention
     datums = list(restaurants_train())
 
-    d = json.load(open("data/nouns_restaurant.json"))
+    d = json.load(open("../data/nouns_restaurant.json"))
     nouns = Counter()
     for k, v in d.items():
         if k.lower() in r.items:

@@ -13,32 +13,32 @@ logging.basicConfig(level=logging.INFO)
 
 if __name__ == "__main__":
 
-    paths = ["data/my_data.conllu"]
+    paths = ["../data/output.conllu"]
     create_noun_counts(paths,
-                       "data/nouns.json")
-    conll2text(paths, "data/all_txt.txt")
+                       "../data/nouns.json")
+    conll2text(paths, "../data/all_txt.txt")
     corpus = [x.lower().strip().split()
-              for x in open("data/all_txt.txt")]
+              for x in open("../data/all_txt.txt")]
 
     f = Word2Vec(corpus,
                  sg=0,
                  negative=5,
                  window=10,
-                 size=200,
+                 vector_size=200,
                  min_count=2,
-                 iter=5,
+                 epochs=5,
                  workers=10)
 
-    f.wv.save_word2vec_format("embeddings/my_word_vectors.vec")
+    f.wv.save_word2vec_format("../embeddings/my_word_vectors.vec")
 
-    d = json.load(open("data/nouns.json"))
+    d = json.load(open("../data/nouns.json"))
     nouns = Counter()
     for k, v in d.items():
-        if k.lower() in f.wv.items:
+        if k.lower() in f.wv.key_to_index:
             nouns[k.lower()] += v
 
     nouns, _ = zip(*sorted(nouns.items(),
                            key=lambda x: x[1],
                            reverse=True))
 
-    json.dump(nouns, open("data/aspect_words.json", "w"))
+    json.dump(nouns, open("../data/aspect_words.json", "w"))

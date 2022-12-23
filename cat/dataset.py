@@ -51,8 +51,8 @@ rest_14_train = partial(loader,
 
 
 ganu_test = partial(loader,
-                    instance_path="data/test_tok.txt",
-                    label_path="data/test_label.txt",
+                    instance_path="../data/test_tok.txt",
+                    label_path="../data/test_label.txt",
                     subset_labels={"ambience",
                                    "staff",
                                    "food"})

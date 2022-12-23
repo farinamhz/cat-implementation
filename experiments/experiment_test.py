@@ -17,7 +17,7 @@ BEST_RBF = {"n_noun": 200}
 if __name__ == "__main__":
 
     scores = defaultdict(dict)
-    r = Reach.load("embeddings/restaurant_vecs_w2v.vec",
+    r = Reach.load("../embeddings/restaurant_vecs_w2v.vec",
                    unk_word="<UNK>")
 
     d = json.load(open("data/nouns_restaurant.json"))
@@ -27,7 +27,7 @@ if __name__ == "__main__":
         if k.lower() in r.items:
             nouns[k.lower()] += v
 
-    embedding_paths = ["embeddings/restaurant_vecs_w2v.vec"]
+    embedding_paths = ["../embeddings/restaurant_vecs_w2v.vec"]
     bundles = ((rbf_attention, attention), embedding_paths)
 
     for att, path in product(*bundles):

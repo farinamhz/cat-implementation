@@ -11,14 +11,14 @@ N_ASPECT_WORDS = 200
 if __name__ == "__main__":
 
     scores = defaultdict(dict)
-    r = Reach.load("embeddings/my_word_vectors.vec",
+    r = Reach.load("../embeddings/my_word_vectors.vec",
                    unk_word="<UNK>")
 
-    aspects = [[x] for x in json.load(open("data/aspect_words.json"))]
+    aspects = [[x] for x in json.load(open("../data/aspect_words.json"))]
     aspects = aspects[:N_ASPECT_WORDS]
 
     instances = ["text_1".split(), "text_2".split()]
-    label_set = {"label1", "label2", "label3"}
+    label_set = {"food", "staff", "ambience"}
 
     s = get_scores(instances,
                    aspects,

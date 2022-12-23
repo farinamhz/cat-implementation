@@ -12,12 +12,12 @@ from collections import defaultdict
 if __name__ == "__main__":
 
     scores = defaultdict(dict)
-    r = Reach.load("embeddings/restaurant_vecs_w2v.vec",
+    r = Reach.load("../embeddings/restaurant_vecs_w2v.vec",
                    unk_word="<UNK>")
 
     datums = list(restaurants_test())
 
-    for path in sorted(glob("embeddings/restaurant_vecs_w2v.vec")):
+    for path in sorted(glob("../embeddings/restaurant_vecs_w2v.vec")):
         r = Reach.load(path, unk_word="<UNK>")
 
         for idx, (instances, y, label_set) in enumerate(datums):

@@ -18,10 +18,10 @@ if __name__ == "__main__":
 
     scores = defaultdict(dict)
 
-    r = Reach.load("embeddings/restaurant_vecs_w2v.vec",
+    r = Reach.load("../embeddings/restaurant_vecs_w2v.vec",
                    unk_word="<UNK>")
 
-    nouns = json.load(open("data/nouns_restaurant.json"))
+    nouns = json.load(open("../data/nouns_restaurant.json"))
 
     c = Counter()
     for k, v in nouns.items():
