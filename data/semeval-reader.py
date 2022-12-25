@@ -1,20 +1,4 @@
-import json
-from pathlib import Path
 import xml.etree.ElementTree as ET
-from xml.etree.ElementTree import Element
-from xml.etree.ElementTree import ParseError
-from typing import List, Union, Dict, Any, Optional
-
-
-# import tempfile
-# import zipfile
-# import tarfile
-#
-# from allennlp.common.file_utils import cached_path
-# import requests
-
-# from target_extraction.data_types import TargetTextCollection, TargetText
-# from target_extraction.data_types_util import Span
 
 
 def semeval_2014(data_fp, conflict):
@@ -44,15 +28,15 @@ def semeval_2014(data_fp, conflict):
 
 
 def _semeval_extract_data(sentence_tree, conflict):
-    '''
+    """
     :param sentence_tree: The root element of the XML tree that has come
                           from a SemEval XML formatted XML File.
     :param conflict: Whether or not to include targets or categories that
                      have the `conflict` sentiment value. True is to include
                      conflict targets and categories.
-    :returns: The SemEval data formatted into a
-              `target_extraction.data_types.TargetTextCollection` object.
-    '''
+    :returns: The SemEval data formatted into a text object.
+    """
+
     all_text = []
     for sentence in sentence_tree:
         text_id = sentence.attrib['id']
@@ -91,11 +75,6 @@ def _semeval_extract_data(sentence_tree, conflict):
                     print(all_text.pop(), categories)
                     # all_text.pop()
                     break
-                # if "food" not in categories and "service" not in categories and \
-                #         "ambience" not in categories and "price" not in categories and \
-                #         "anecdotes/miscellaneous" not in categories:
-                #     all_text.pop()
-                #     break
             elif data.tag == 'Opinions':
                 for opinion in data:
                     category_target_sentiment = opinion.attrib['polarity']
