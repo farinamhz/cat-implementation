@@ -15,17 +15,17 @@ GAMMA = .03
 if __name__ == "__main__":
 
     scores = defaultdict(dict)
-    r = Reach.load("../embeddings/restaurant_vecs_w2v.vec",
+    r = Reach.load("output/embeddings/restaurant_vecs_w2v.vec",
                    unk_word="<UNK>")
 
-    d = json.load(open("data/nouns_restaurant.json"))
+    d = json.load(open("output/nouns_restaurant.json"))
 
     nouns = Counter()
     for k, v in d.items():
         if k.lower() in r.items:
             nouns[k.lower()] += v
 
-    embedding_paths = ["../embeddings/restaurant_vecs_w2v.vec"]
+    embedding_paths = ["output/embeddings/restaurant_vecs_w2v.vec"]
     bundles = ((rbf_attention, attention), embedding_paths)
     aspects = [["ambience", "staff", "food"]]
 
@@ -61,5 +61,5 @@ if __name__ == "__main__":
     rbf_per_class = np.stack(rbf_per_class).mean(0)
     rbf_macro = np.mean([v[0][1][:-1] for v in rbf_score.values()], 0)
 
-    print(att_per_class)
-    print(rbf_per_class)
+    print("Attention per class :\t", att_per_class)
+    print("RBF per class :\t", rbf_per_class)

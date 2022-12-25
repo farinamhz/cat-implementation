@@ -3,18 +3,11 @@ import numpy as np
 import pandas as pd
 import json
 
-# import sys
-# sys.path.insert(0, 'cat-implementation/cat/simple')
-
-# import sys
-# print("sys", sys.path)
-# sys.path.append("cat-implementation/")
-
-from src.cmn.simple import (get_scores,
-                            attention,
-                            rbf_attention,
-                            mean)
-from src.cmn.dataset import restaurants_test
+from cmn.simple import (get_scores,
+                        attention,
+                        rbf_attention,
+                        mean)
+from cmn.dataset import restaurants_test
 from reach import Reach
 from sklearn.metrics import precision_recall_fscore_support
 from collections import defaultdict
@@ -25,10 +18,10 @@ if __name__ == "__main__":
 
     scores = defaultdict(dict)
 
-    r = Reach.load("embeddings/restaurant_vecs_w2v.vec",
+    r = Reach.load("output/embeddings/restaurant_vecs_w2v.vec",
                    unk_word="<UNK>")
 
-    nouns = json.load(open("data/nouns_restaurant.json"))
+    nouns = json.load(open("output/nouns_restaurant.json"))
 
     aspects = [["ambience", "staff", "food"]]
 
@@ -76,4 +69,4 @@ if __name__ == "__main__":
                                    "p",
                                    "r",
                                    "f1"))
-    df.to_csv("results_grid_search.csv")
+    df.to_csv("output/results_grid_search.csv")
